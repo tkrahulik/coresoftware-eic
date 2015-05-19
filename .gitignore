@@ -1,28 +1,53 @@
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+# http://www.gnu.org/software/automake
 
-# Precompiled Headers
-*.gch
-*.pch
+Makefile.in
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+# http://www.gnu.org/software/autoconf
 
-# Fortran module files
-*.mod
+autom4te.cache
+aclocal.m4
+compile
+configure
+depcomp
+install-sh
+missing
+stamp-h1
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
+config.guess
+config.sub
+ltmain.sh
 
-# Executables
-*.exe
-*.out
-*.app
+
+# Have editor/IDE/OS specific files you need to ignore? Consider using a global gitignore: 
+#
+# * Create a file at ~/.gitignore
+# * Include files you want ignored
+# * Run: git config --global core.excludesfile ~/.gitignore
+#
+# After doing this, these files will be ignored in all your git projects,
+# saving you from having to 'pollute' every project you touch with them
+#
+# For MacOS:
+#
+.DS_Store
+
+# ignore RVM configuration
+.rvmrc
+
+# For TextMate
+*.tmproj
+tmtags
+
+# For emacs:
+*~
+\#*
+.\#*
+
+# For vim:
+*.swp
+
+# For redcar:
+.redcar
+
+# For rubinius:
+*.rbc
