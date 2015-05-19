@@ -9,7 +9,8 @@ int Max_cemc_layer = 30;
 int Min_hcal_layer = 1;
 int Max_hcal_layer = 2;
 
-double Min_forward_eta = 1.15;
+double Min_forward_eta = 1.22;
+double Min_forward_eta_RICH = Min_forward_eta+0.5;
 int N_forward_sector = 8;
 
 double no_overlapp = 0.0001; // added to radii to avoid overlapping volumes
@@ -46,10 +47,12 @@ G4Init()
   // this macro are not needed
 //    gROOT->LoadMacro("G4_CEmc_cross.C");
 //    gROOT->LoadMacro("G4_Hcal_cross.C");
-  gROOT->LoadMacro("G4_CEmc_layer.C");
+//  gROOT->LoadMacro("G4_CEmc_layer.C");
+  gROOT->LoadMacro("G4_CEmc_Spacal.C");
   CEmcInit();
 //  gROOT->LoadMacro("G4_Hcal_layer.C");
-  gROOT->LoadMacro("G4_Hcal_cross.C");
+//  gROOT->LoadMacro("G4_Hcal_cross.C");
+  gROOT->LoadMacro("G4_Hcal_ref.C");
   HCalInit();
   gROOT->LoadMacro("G4_Svtx.C");
   SvtxInit();
@@ -125,7 +128,7 @@ G4Setup(const int absorberactive = 0, const float field = -1.)
   int ilayer = -1; // just to declare this varialbe outside of detector setups
 
   double radius = tpc_inner_radius;
-//  radius = Tpc(g4Reco, radius, tpc_thickness, absorberactive);
+  radius = Tpc(g4Reco, radius, tpc_thickness, absorberactive);
 //
   radius = G4_DIRC(g4Reco);
 
@@ -150,6 +153,7 @@ G4Setup(const int absorberactive = 0, const float field = -1.)
   radius = emc_inner_radius;
   int ncross = 4;
   radius = CEmc(g4Reco, radius, ncross, absorberactive);
+  double saveradius = radius + no_overlapp;
 
 //   double al_radlen =  8.897;
 //   radius = magnet_inner_radius + magnet_thickness/2. - al_radlen/2.;
@@ -182,13 +186,8 @@ G4Setup(const int absorberactive = 0, const float field = -1.)
   //radius += 60;
 
   cout <<"G4Setup - loading updated HCal setup"<<endl;
-  // Updated HCal based on
-  // current sPHENIX design value for the inner hcal radius
-    radius = 183.;
-  // number of slat crossings if G4_Hcal_cross*.C is loaded, otherwise ignored
-    int ncross = 2;
-  // the HCal function returns the outer radius of it with overlap protection
-    radius = HCal(g4Reco, radius, ncross, absorberactive);
+  ncross = 4;
+  radius = HCal(g4Reco, saveradius, ncross, absorberactive);
 
   /////////////////////////////////////////////////
   //  Build hadron going detectors
@@ -198,7 +197,7 @@ G4Setup(const int absorberactive = 0, const float field = -1.)
   G4_FGEM_ePHENIX(g4Reco, N_forward_sector, Min_forward_eta);
 
 // RICH
-  G4_RICH(g4Reco, N_forward_sector, Min_forward_eta);
+  G4_RICH(g4Reco, N_forward_sector, Min_forward_eta_RICH);
 
   //AeroGel
   G4_AeroGel(g4Reco, N_forward_sector, Min_forward_eta);

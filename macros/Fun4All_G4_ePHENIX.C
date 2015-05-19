@@ -70,7 +70,7 @@ Fun4All_G4_ePHENIX( //
       gun->set_vtx(0, 0, 0);
 //        gun->set_mom(0, 0, 10);
       gun->set_mom(1.12641e-16, 1.83962, 13.6021);
-      se->registerSubsystem(gun);
+//      se->registerSubsystem(gun);
 
       PHG4ParticleGenerator *gen = new PHG4ParticleGenerator();
 
@@ -94,7 +94,7 @@ Fun4All_G4_ePHENIX( //
           "/direct/phenix+sim02/phnxreco/ePHENIX/jinhuang/display/pythia.ep.250x010.10000000events.seed679586890.root";
       eic->OpenInputFile(infile);
       eic->SetFirstEntry(565);
-//      se->registerSubsystem(eic);
+      se->registerSubsystem(eic);
 
     }
   //---------------------
