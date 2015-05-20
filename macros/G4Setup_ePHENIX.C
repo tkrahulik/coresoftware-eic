@@ -10,7 +10,8 @@ int Min_hcal_layer = 1;
 int Max_hcal_layer = 2;
 
 double Min_forward_eta = 1.22;
-double Min_forward_eta_RICH = Min_forward_eta+0.5;
+double Min_forward_eta_RICH = Min_forward_eta+0.2;
+double Min_forward_eta_Cal = 1.1;
 int N_forward_sector = 8;
 
 double no_overlapp = 0.0001; // added to radii to avoid overlapping volumes
@@ -203,14 +204,14 @@ G4Setup(const int absorberactive = 0, const float field = -1.)
   G4_AeroGel(g4Reco, N_forward_sector, Min_forward_eta);
 
   // double newzpos = G4_FEmc(g4Reco, 315.0, Min_forward_eta, 4.0, 10., "G4_W"); // 10cm thick W/Sci calorimeter = 20 X0
-  double newzpos = G4_FEmc(g4Reco, 315.0, Min_forward_eta, 4.0, 17., "G4_Pb"); // 17cm thick Pb/Sci calorimeter = 20 X0
+  double newzpos = G4_FEmc(g4Reco, 315.0, Min_forward_eta_Cal, 4.0, 17., "G4_Pb"); // 17cm thick Pb/Sci calorimeter = 20 X0
 
   if (newzpos > 350)
     {
       cout << "overlapp with hcal" << endl;
     }
   // HCal
-  G4_FHCal(g4Reco, 350.0, Min_forward_eta, 5.0, 100.);
+  G4_FHCal(g4Reco, 350.0, Min_forward_eta_Cal, 5.0, 100.);
 
   PHG4ConeSubsystem *bbc = new PHG4ConeSubsystem("BBC", 0);
   bbc->SetZlength(2);

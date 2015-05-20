@@ -72,7 +72,7 @@
 # To draw gammas only
 /vis/filtering/trajectories/create/particleFilter
 #/vis/filtering/trajectories/particleFilter-0/add gamma
-#/vis/filtering/trajectories/particleFilter-0/add neutron
+/vis/filtering/trajectories/particleFilter-0/add neutron
 # Remove all neutrios - Jin
 /vis/filtering/trajectories/particleFilter-0/add nu_e
 /vis/filtering/trajectories/particleFilter-0/add nu_tau
