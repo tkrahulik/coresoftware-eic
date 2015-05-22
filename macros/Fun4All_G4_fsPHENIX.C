@@ -10,7 +10,7 @@ using namespace std;
 //! \param[in] embed_input_file Second input file for embedding. Also depending on the "Input options" as in the beginning of macro.
 void
 Fun4All_G4_fsPHENIX(int nEvents = 3, int nSkip = 0, const char * input_file =
-    "test/ID1001_phpythia_jet_eta0_E1.root.lst",
+    "test.root",
 //    "input",//
     const char * embed_input_file = NULL
 //        "/direct/phenix+sim02/phnxreco/ePHENIX/jinhuang/fsPHENIX_work/JetG4/pA_sPHENIX_HcalIn_fHcal/G4sPHENIX-4fm.lst"//
@@ -37,8 +37,8 @@ Fun4All_G4_fsPHENIX(int nEvents = 3, int nSkip = 0, const char * input_file =
   const bool readhepmc = false; // read HepMC files
   // Or:
   // read DST files containing PHPythia nodes
-  const bool readpythiaDST = true; // read PHPythia files
-//  const bool readpythiaDST = false; // read PHPythia files
+//  const bool readpythiaDST = true; // read PHPythia files
+  const bool readpythiaDST = false; // read PHPythia files
   // Or:
   // Generate pythia event
   const bool runpythia = false; // read HepMC files
@@ -70,38 +70,10 @@ Fun4All_G4_fsPHENIX(int nEvents = 3, int nSkip = 0, const char * input_file =
   std::string embed_top_node = "TOP_EMBED";
 
 
-  //-----------------------------------------------------------------
-  // flag set for G4 production
-  //-----------------------------------------------------------------
+//  -----------------------------------------------------------------
+//   flag set for G4 production
+//  -----------------------------------------------------------------
 
-//  bool do_g4_eval = true;
-//
-//  bool do_svx_cell = true;
-//  bool do_svx_track = false;
-//  bool do_svx_eval = false;
-//
-//  bool do_cemc_cell = true;
-//  bool do_cemc_twr = true;
-//  bool do_cemc_cluster = false;
-//  bool do_cemc_eval = false;
-//
-//  bool do_hcal_cell = true;
-//  bool do_hcal_twr = true;
-//  bool do_hcal_cluster = false;
-//  bool do_hcal_eval = false;
-//
-//  bool do_fhcal_twr = true;
-//  bool do_fhcal_cluster = false;
-//  bool do_fhcal_eval = false;
-//
-//  bool do_mc_twr = false;
-//  bool do_jet_reco = false;
-//  bool do_jet_bgd_sub = false;
-
-//  //-----------------------------------------------------------------
-//  // flag set for jet reconstruction from G4 hits
-//  //-----------------------------------------------------------------
-//
   bool do_g4_eval = true;
 
   bool do_svx_cell = true;
@@ -122,9 +94,37 @@ Fun4All_G4_fsPHENIX(int nEvents = 3, int nSkip = 0, const char * input_file =
   bool do_fhcal_cluster = false;
   bool do_fhcal_eval = false;
 
-  bool do_mc_twr = true;
-  bool do_jet_reco = true;
+  bool do_mc_twr = false;
+  bool do_jet_reco = false;
   bool do_jet_bgd_sub = false;
+
+////  //-----------------------------------------------------------------
+////  // flag set for jet reconstruction from G4 hits
+////  //-----------------------------------------------------------------
+////
+//  bool do_g4_eval = true;
+//
+//  bool do_svx_cell = true;
+//  bool do_svx_track = false;
+//  bool do_svx_eval = false;
+//
+//  bool do_cemc_cell = true;
+//  bool do_cemc_twr = true;
+//  bool do_cemc_cluster = false;
+//  bool do_cemc_eval = false;
+//
+//  bool do_hcal_cell = true;
+//  bool do_hcal_twr = true;
+//  bool do_hcal_cluster = false;
+//  bool do_hcal_eval = false;
+//
+//  bool do_fhcal_twr = true;
+//  bool do_fhcal_cluster = false;
+//  bool do_fhcal_eval = false;
+//
+//  bool do_mc_twr = true;
+//  bool do_jet_reco = true;
+//  bool do_jet_bgd_sub = false;
 
   //-----------------------------------------------------------------
   // flag set for jet embedding and reconstruction from towers
