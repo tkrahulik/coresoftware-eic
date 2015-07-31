@@ -190,8 +190,8 @@ G4Setup(const int absorberactive = 0, const float field = -1.)
   // tracker
   G4_FGEM_fsPHENIX(g4Reco, N_forward_sector, Min_forward_eta);
 
-//  // HCal
-  G4_FHCal(g4Reco, 350.0, 1.1, 5.0, 100.);
+  // HCal
+  G4_FHCal(g4Reco);
 
   // implementing the current MuTr provisorially with a GEM
   make_MuTr_station("MUTR", g4Reco, 465, 1.2, 4.1, 1.0);

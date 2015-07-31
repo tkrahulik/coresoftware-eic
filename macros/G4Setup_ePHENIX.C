@@ -211,7 +211,7 @@ G4Setup(const int absorberactive = 0, const float field = -1.)
       cout << "overlapp with hcal" << endl;
     }
   // HCal
-  G4_FHCal(g4Reco, 350.0, Min_forward_eta_Cal, 5.0, 100.);
+  G4_FHCal(g4Reco); // ForwardHcal detector Geant4 module
 
   PHG4ConeSubsystem *bbc = new PHG4ConeSubsystem("BBC", 0);
   bbc->SetZlength(2);
