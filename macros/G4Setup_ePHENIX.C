@@ -203,13 +203,9 @@ G4Setup(const int absorberactive = 0, const float field = -1.)
   //AeroGel
   G4_AeroGel(g4Reco, N_forward_sector, Min_forward_eta);
 
-  // double newzpos = G4_FEmc(g4Reco, 315.0, Min_forward_eta, 4.0, 10., "G4_W"); // 10cm thick W/Sci calorimeter = 20 X0
-  double newzpos = G4_FEmc(g4Reco, 315.0, Min_forward_eta_Cal, 4.0, 17., "G4_Pb"); // 17cm thick Pb/Sci calorimeter = 20 X0
+  // ECal
+  G4_FEmc(g4Reco); // 17cm thick Pb/Sci calorimeter = 20 X0
 
-  if (newzpos > 350)
-    {
-      cout << "overlapp with hcal" << endl;
-    }
   // HCal
   G4_FHCal(g4Reco); // ForwardHcal detector Geant4 module
 
