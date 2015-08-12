@@ -222,7 +222,7 @@ G4Setup(const int absorberactive = 0, const float field = -1.)
   /////////////////////////////////////////////////
   //  electron going detectors
   /////////////////////////////////////////////////
-  double newzpos = G4_EEmc(g4Reco, -99., -1.2, -4.5, 18. ); // 18cm thick PbWO4 crystal calorimeter
+  G4_EEmc( g4Reco ); // 18cm thick PbWO4 crystal calorimeter
 
   G4_eGEM_ePHENIX(g4Reco);
 
