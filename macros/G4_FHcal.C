@@ -11,7 +11,7 @@ double G4_FHCal(PHG4Reco* g4Reco, const int absorberactive = 0, const char * nam
   // automatically generate path to mapping file
   ostringstream mapping_hhcal;
   mapping_hhcal << getenv("OFFLINE_MAIN") <<
-    "/share/calibrations/ForwardHcal/mapping/towerMap_hHcal_v0.txt";
+    "/share/calibrations/ForwardHcal/mapping/towerMap_FHCAL_v001.txt";
   cout << mapping_hhcal.str() << endl;
 
   // configure detector
