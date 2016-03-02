@@ -1,51 +1,27 @@
-int Min_femc_layer = 0;
-int Max_femc_layer = 60;
 
 void FEmcInit()
 {
-  Min_femc_layer = 0;
-  Max_femc_layer = 60;
 }
 
-// Forward EMC based on central barrel G4 setup
-// zpos is starting position in z
-double G4_FEmc(PHG4Reco* g4Reco, double zpos, const double etamin, const double etamax, const double thickness, const string absorbermat = "G4_Pb", const int absorberactive = 0)
+// Forward ECAL dedicated model
+double G4_FEmc(PHG4Reco* g4Reco, const int absorberactive = 0, const char * name = "FEMC")
 {
-  double layerwidth = thickness/(Max_femc_layer-Min_femc_layer);
-  double absorberwidth = layerwidth*2./3.; // 2/3rd absorber
-  float scintiwidth = layerwidth/3.; // 1/3rd scintillator
-  double pos = zpos + absorberwidth/2;
-  PHG4ConeSubsystem* femc;
+  PHG4ForwardEcalSubsystem *hemc = new PHG4ForwardEcalSubsystem(name);
 
-  cout << "Abswidth: " << absorberwidth << endl;
-  cout << "Scintwidth: " << scintiwidth << endl;
+  ostringstream mapping_hemc;
+  //mapping_hemc << "calibrations/ForwardEcal/mapping/towerMap_FEMC_v002.txt";
 
-  for (int i = Min_femc_layer; i <  Max_femc_layer; i++)
-    {
-      cout << "Layer " << i << " : pos " << pos << endl;
+    // automatically generate path to mapping file
+    mapping_hemc << getenv("OFFLINE_MAIN") <<
+      "/share/calibrations/ForwardEcal/mapping/towerMap_FEMC_v002.txt";
+    cout << mapping_hemc.str() << endl;
 
-      femc = new PHG4ConeSubsystem("ABSORBER_FEMC", i);
-      femc->SetPlaceZ(pos);
-      femc->SetMaterial( absorbermat );
-      femc->SetZlength(absorberwidth/2);
-      femc->Set_eta_range(etamin, etamax);
-      if (absorberactive)  femc->SetActive();
-      femc->SuperDetector("ABSORBER_FEMC");
-      femc->OverlapCheck(overlapcheck);
-      g4Reco->registerSubsystem( femc );
-      pos += (absorberwidth/2. + scintiwidth/2. + no_overlapp);
+  // configure detector
+  hemc->SetTowerMappingFile( mapping_hemc.str() );
+  hemc->OverlapCheck(overlapcheck);
 
-      femc = new PHG4ConeSubsystem("FEMC", i);
-      femc->SetPlaceZ(pos);
-      femc->SetMaterial("G4_POLYSTYRENE");
-      femc->SetZlength(scintiwidth/2);
-      femc->Set_eta_range(etamin, etamax);
-      femc->SetActive(true);
-      femc->SuperDetector("FEMC");
-      femc->OverlapCheck(overlapcheck);
-      g4Reco->registerSubsystem( femc );
-      pos += (scintiwidth/2. + absorberwidth/2. + no_overlapp);
-    }
-  pos -= absorberwidth/2.;
+  // register detector
+  g4Reco->registerSubsystem( hemc );
+
   return 0;
 }
